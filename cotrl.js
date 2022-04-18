@@ -60,13 +60,11 @@ const number = function () {
     }
 }
 number();
-console.log(box);
 
 function callMe(e) {
     let arr = (this.id).split(',')
     let r = Number(arr[0])
     let rT = Number(arr[1])
-    console.log(this.id)
     const tag = document.getElementById(this.id)
     if (box[r][rT] === 'BoM') {
         tag.style = `height: 52px; width: 52px;background-color: rgb(231, 214, 214);`
@@ -75,12 +73,18 @@ function callMe(e) {
 
         setTimeout(() => {
             // location.reload();
+            times--
+            if (times === 0) {
+                const butn = document.getElementById('btn')
+                butn.style = `color: red;`
+                setTimeout(() => location.reload(), 9000)
+            }
             if (reloade1 === 1) {
                 const body = document.querySelector('center')
                 const butn = document.createElement('button')
                 butn.innerHTML = 'Restart Game'
                 butn.setAttribute('id', 'btn');
-                butn.style = `height:40px; width: 80px; background-color: rgb(245, 102, 19);`
+                butn.style = `height:40px; width: 100px; background-color: rgb(245, 102, 19);`
                 body.appendChild(butn);
                 butn.addEventListener('click', () => location.reload())
             }
@@ -89,13 +93,24 @@ function callMe(e) {
                 butn.innerHTML = `(${reloade1}) Restart Game`
             }
             reloade1++;
-        }, 1000)
+        }, 0)
         // body.innerHTML = 'Found Bom, Try another time...'
 
     }
     else {
         tag.innerHTML = `${box[r][rT]}`
         tag.style = `height: 52px; width: 52px;background-color: rgb(231, 214, 214);`
+        if (reloade1 === 1 && times === 81) {
+            const body = document.querySelector('center')
+            const butn = document.createElement('button')
+            butn.innerHTML = 'You WON the Game :) - Play again'
+            butn.setAttribute('id', 'btn');
+            butn.style = `background-color: green;`
+            body.appendChild(butn);
+            butn.addEventListener('click', () => location.reload())
+
+        }
+        times++;
     }
 
 }
@@ -103,23 +118,17 @@ function callMe(e) {
 let reloade1 = 1;
 const body = document.querySelector('center').childNodes[3]
 body.style = 'background-color: rgb(200, 100, 10) '
-console.log(body)
-const area = 9;
+let area = 9
 let times = 1;
 for (let a = 0; area > a; a++) {
     const tr = document.createElement('tr');
-    // tr.style=`display: flex;`
     for (let b = 0; area > b; b++) {
         const td = document.createElement('th');
         td.setAttribute('id', `${a},${b}`)
         if (box[a][b] === 0) {
-            // console.log('bom')
-            // td.setAttribute('class', `class${times}`)
             box[a][b] = " "
-            // console.log(td)
         }
         if (box[a][b] === 'BoM') {
-
             times++;
         }
         // td.innerHTML = '';
