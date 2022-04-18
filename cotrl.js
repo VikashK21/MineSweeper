@@ -72,12 +72,12 @@ function callMe(e) {
         tag.innerHTML = `<img src="./bomb.png" alt="BoM" height="40px" width="40px">`
 
         setTimeout(() => {
-            // location.reload();
             times--
+            // location.reload();
             if (times === 0) {
                 const butn = document.getElementById('btn')
                 butn.style = `color: red;`
-                setTimeout(() => location.reload(), 9000)
+                setTimeout(() => location.reload(), 5000)
             }
             if (reloade1 === 1) {
                 const body = document.querySelector('center')
@@ -100,7 +100,7 @@ function callMe(e) {
     else {
         tag.innerHTML = `${box[r][rT]}`
         tag.style = `height: 52px; width: 52px;background-color: rgb(231, 214, 214);`
-        if (reloade1 === 1 && times === 81) {
+        if (reloade1 === 1 && times3 + times === 81) {
             const body = document.querySelector('center')
             const butn = document.createElement('button')
             butn.innerHTML = 'You WON the Game :) - Play again'
@@ -110,16 +110,17 @@ function callMe(e) {
             butn.addEventListener('click', () => location.reload())
 
         }
-        times++;
+        times3++;
     }
 
 }
 
 let reloade1 = 1;
+let times3 = 0
 const body = document.querySelector('center').childNodes[3]
 body.style = 'background-color: rgb(200, 100, 10) '
 let area = 9
-let times = 1;
+let times = 0;
 for (let a = 0; area > a; a++) {
     const tr = document.createElement('tr');
     for (let b = 0; area > b; b++) {
